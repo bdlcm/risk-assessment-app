@@ -3,7 +3,7 @@ import * as React from 'react';
 import { TextInput, Button } from 'react-native-paper';
 import { SafeArea } from '../utility/safe-area.components';
 import { FormContainer, FormButton, FormInput } from '../../components/style/styled-form.component';
- 
+
 export const InputComponent = ({ navigation }) => {
   return (
     <>
