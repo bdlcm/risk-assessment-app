@@ -1,22 +1,21 @@
 /* eslint-disable react/prop-types */
-import * as React from 'react';
-import { TextInput, Button } from 'react-native-paper';
+import React, { useState, useEffect } from 'react';
 import { SafeArea } from '../utility/safe-area.components';
 import { FormContainer, FormButton, FormInput } from '../../components/style/styled-form.component';
+import { SafeAreaView, StyleSheet, TextInput } from 'react-native';
 
 export const InputComponent = ({ navigation }) => {
-  return (
-    <>
-      <SafeArea>
-        <FormContainer>
-          <FormInput mode="outlined" label="Age"></FormInput>
+  const [sex, onChangeSex] = React.useState('');
+  const [age, onChangeAge] = React.useState('');
 
-          <FormInput mode="outlined" label="Sex"></FormInput>
-          <FormButton mode="contained" onPress={() => navigation.navigate('Results')}>
-            Search
-          </FormButton>
-        </FormContainer>
-      </SafeArea>
-    </>
+  return (
+    <SafeArea>
+      <FormContainer>
+        <FormInput label="Sex" onChangeText={onChangeSex} value={sex} />
+        <FormInput onChangeText={onChangeAge} value={age} label="Age" keyboardType="numeric" />
+        <FormButton
+          onPress={() => navigation.navigate('Results', { age: age, sex: sex })}></FormButton>
+      </FormContainer>
+    </SafeArea>
   );
 };

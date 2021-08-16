@@ -21,6 +21,7 @@ export const FormButton = styled(Button).attrs({
   padding: ${(props) => props.theme.space[2]};
   margin-bottom: 5px;
   margin-top: 15px;
+  color: blue;
 
 `;
 export const FormSwitch = styled(Switch)`
