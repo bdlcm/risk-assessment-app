@@ -6,29 +6,47 @@ import NumericInput from 'react-native-numeric-input';
 export const FormContainer = styled.View`
   background-color: rgba(255, 255, 255, 0.7);
   padding: ${(props) => props.theme.space[4]};
-  text-align: center;
+  width: 100%;
+  height: 100%;
 `;
 
 export const FormVeil = styled.View`
   position: absolute;
   width: 100%;
   height: 100%;
+
   background-color: rgba(255, 255, 255, 0.3);
 `;
 
-export const FormButton = styled(Button).attrs({
+export const FormButton = styled(Button).attrs({})`
+  background-color: #6c2be3;
+  color: white;
+  padding: ${(props) => props.theme.space[2]};
+  margin-bottom: 5px;
+  margin-top: 15px;
+  width: 100%;
+  text-align:center;
+  position: absolute;
+  bottom: 10%;
+  left:10%;
+`;
+
+export const AccountButton = styled(Button).attrs({
   color: colors.brand.primary,
 })`
   padding: ${(props) => props.theme.space[2]};
   margin-bottom: 5px;
-  margin-top: 15px;
 `;
+
 export const FormSwitch = styled(Switch)``;
 
 export const FormInput = styled(TextInput)`
   width: 100%;
 `;
 
+const x = -50;
+const y = 0;
+
 export const FormCenter = styled.View`
-  justify-content: center;
+  position: relative;
 `;
