@@ -1,6 +1,4 @@
 import styled from 'styled-components/native';
-import { Button, TextInput, Switch, Card } from 'react-native-paper';
-
 export const CardContainer = styled.View`
   background-color: white;
   padding: ${(props) => props.theme.space[2]};

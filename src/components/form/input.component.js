@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { SafeArea } from '../utility/safe-area.components';
+import { LocationContext } from '../../context/results.context';
 import {
   FormContainer,
   FormButton,
@@ -14,64 +16,68 @@ import { Text } from 'react-native-paper';
 export const InputComponent = ({ navigation }) => {
   const [sex, onChangeSex] = React.useState('');
   const [age, onChangeAge] = React.useState('');
-  const [location, onChangeLocation] = React.useState('');
- 
+  // const [area, onChangeLocation] = React.useState('');
+  const { location, getArea, area } = useContext(LocationContext);
+
   const genderList = ['Male', 'Female'];
   const locationList = [
-    'Alabama',
-    'Alaska',
-     'Arizona',
-    'Arkansas',
-    'California',
-    'Colorado',
-    'Connecticut',
-    'Delaware',
-    'District of Columbia',
-    'Florida',
-    'Georgia',
-    'Guam',
-    'Hawaii',
-    'Idaho',
-    'Illinois',
-    'Indiana',
-    'Iowa',
-    'Kansas',
-    'Kentucky',
-    'Louisiana',
-    'Maine',
-    'Maryland',
-    'Massachusetts',
-    'Michigan',
-    'Minnesota',
-     'Mississippi',
-    'Missouri',
-    'Montana',
-    'Nebraska',
-    'Nevada',
-    'New Hampshire',
-    'New Jersey',
-    'New Mexico',
-    'New York',
-    'North Carolina',
-    'North Dakota',
-    'Northern Mariana Islands',
-    'Ohio',
-    'Oklahoma',
-    'Oregon',
-    'Pennsylvania',
-    'Puerto Rico',
-    'Rhode Island',
-    'South Carolina',
-    'South Dakota',
-    'Tennessee',
-    'Texas',
-     'Utah',
-    'Vermont',
-    'Virginia',
-    'Washington',
-    'West Virginia',
-    'Wisconsin',
-    'Wyoming',
+    'AK',
+    'AL',
+    'AR',
+    'AS',
+    'AZ',
+    'CA',
+    'CO',
+    'CT',
+    'DC',
+    'DE',
+    'FL',
+    'GA',
+    'GU',
+    'HI',
+    'IA',
+    'ID',
+    'IL',
+    'IN',
+    'KS',
+    'KY',
+    'LA',
+    'MA',
+    'MD',
+    'ME',
+    'MI',
+    'MN',
+    'MO',
+    'MP',
+    'MS',
+    'MT',
+    'NC',
+    'ND',
+    'NE',
+    'NH',
+    'NJ',
+    'NM',
+    'NV',
+    'NY',
+    'OH',
+    'OK',
+    'OR',
+    'PA',
+    'PR',
+    'RI',
+    'SC',
+    'SD',
+    'TN',
+    'TX',
+    'UM',
+    'UT',
+    'VA',
+    'VI',
+    'VT',
+    'WA',
+    'WI',
+    'WV',
+    'WY',
   ];
   return (
     <SafeArea>
@@ -107,11 +113,11 @@ export const InputComponent = ({ navigation }) => {
 
           <Spacer position="top" size="medium">
             <SelectDropdown
-              defaultValue={location}
+              defaultValue={area}
               data={locationList}
               mode={'outlined'}
               onSelect={(selectedItem, index) => {
-                onChangeLocation(selectedItem);
+                getArea(selectedItem);
               }}
               sbuttonTextAfterSelection={(selectedItem, index) => {
                 // text represented after item is selected
@@ -146,9 +152,7 @@ export const InputComponent = ({ navigation }) => {
 
         <FormButton
           mode="contained"
-          onPress={() =>
-            navigation.navigate('Results', { age: age, sex: sex, location: location })
-          }>
+          onPress={() => navigation.navigate('Results', { age: age, sex: sex, area: area })}>
           Next
         </FormButton>
       </FormContainer>

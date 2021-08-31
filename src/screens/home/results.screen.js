@@ -20,18 +20,26 @@ export const ResultsScreen = ({ route }) => {
 
   const result = vaccineComputation(age, sex);
 
+  
+
   useEffect(() => {
     const result = vaccineComputation(age, sex, area);
+    console.log('location from results', location.total)
   }, [location]);
 
   return (
     <SafeArea>
       <CardContainer>
+      <ResultCard>
+      <Text>Location: {location.state} </Text>
+
+          <Text>Current number of Cases: {location.total} </Text>
+           
+        </ResultCard>
         <ResultCard>
           <Text>Age: {age} </Text>
           <Text>Sex: {sex} </Text>
-          <Text>Location: {area} </Text>
-          <Text>Result: {result} </Text>
+           <Text>Result: {result} </Text>
         </ResultCard>
       </CardContainer>
     </SafeArea>

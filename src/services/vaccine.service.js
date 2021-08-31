@@ -1,5 +1,3 @@
-
-
 export const vaccineComputation = (age, sex) => {
   if (sex == 'Male') {
     if (age >= 12) {

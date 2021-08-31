@@ -4,13 +4,16 @@ import { theme } from './src/infrastructure/theme';
 import React from 'react';
 import { Navigation } from './src/infrastructure/navigation';
 import { Provider } from 'react-native-paper';
+import { LocationContextProvider } from './src/context/results.context';
 
 export default function App() {
   return (
     <>
       <Provider>
         <ThemeProvider theme={theme}>
-          <Navigation />
+          <LocationContextProvider>
+            <Navigation />
+          </LocationContextProvider>
         </ThemeProvider>
         <ExpoStatusBar style="auto" />
       </Provider>

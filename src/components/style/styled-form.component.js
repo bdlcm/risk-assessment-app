@@ -1,7 +1,7 @@
+/* eslint-disable no-unused-vars */
 import styled from 'styled-components/native';
 import { Button, TextInput, Switch } from 'react-native-paper';
 import { colors } from '../../infrastructure/theme/colors';
-import NumericInput from 'react-native-numeric-input';
 
 export const FormContainer = styled.View`
   background-color: rgba(255, 255, 255, 0.7);
@@ -25,10 +25,10 @@ export const FormButton = styled(Button).attrs({})`
   margin-bottom: 5px;
   margin-top: 15px;
   width: 100%;
-  text-align:center;
+  text-align: center;
   position: absolute;
   bottom: 10%;
-  left:10%;
+  left: 10%;
 `;
 
 export const AccountButton = styled(Button).attrs({
