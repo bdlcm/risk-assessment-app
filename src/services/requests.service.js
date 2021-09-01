@@ -3,7 +3,7 @@
  
 
 export const getInfo = (state) => {
-  let url =  `https://api.covidtracking.com/v1/states/${state}/current.json`;
+  let url =  `https://corona.lmao.ninja/v3/covid-19/states/${state}`;
   return fetch(url)
     .then((response) => response.json())
     .then((data) => {
@@ -12,7 +12,7 @@ export const getInfo = (state) => {
     })
     .catch((err) => console.error(err));
 };
-
+ 
 // axios.get(`https://api.covidtracking.com/v1/states/ca/20200501.json`).then((res) => {
 //   const data = res.data.hospitalizedCurrently;
 // const response = await axios.get(`https://api.covidtracking.com/v1/states/ca/20200501.json`);

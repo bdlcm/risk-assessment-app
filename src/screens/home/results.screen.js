@@ -31,9 +31,9 @@ export const ResultsScreen = ({ route }) => {
     <SafeArea>
       <CardContainer>
       <ResultCard>
-      <Text>Location: {location.state} </Text>
+      <Text>Location: {area} </Text>
 
-          <Text>Current number of Cases: {location.total} </Text>
+          <Text>Current number of Cases: {location.cases} </Text>
            
         </ResultCard>
         <ResultCard>
