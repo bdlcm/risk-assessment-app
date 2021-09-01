@@ -14,7 +14,7 @@ import { CardContainer, ResultCard } from '../../components/style/result-card.co
 export const ResultsScreen = ({ route }) => {
   // eslint-disable-next-line react/prop-types
 
-  const { age, sex, area } = route.params;
+  const { age, sex, area, country } = route.params;
   // const { location, setLocation } = useState();
   const { location } = useContext(LocationContext);
 
@@ -31,6 +31,7 @@ export const ResultsScreen = ({ route }) => {
     <SafeArea>
       <CardContainer>
       <ResultCard>
+      <Text>Country: {country} </Text>
       <Text>Location: {area} </Text>
 
           <Text>Current number of Cases: {location.cases} </Text>

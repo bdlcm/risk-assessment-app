@@ -9,10 +9,15 @@ export const LocationContext = React.createContext();
 export const LocationContextProvider = ({ children }) => {
   const [location, setLocation] = useState([]);
   const [area, setArea] = useState([]);
+  const [country, setCountry] = useState([]);
+
   const [countries, setcountries] = useState([]);
 
   const getArea = (clickedArea) => {
     setArea(clickedArea);
+  };
+  const getCountry = (clickedArea) => {
+    setCountry(clickedArea);
   };
   const retrieveCountries = () => {
     getAllCountries()
@@ -45,7 +50,9 @@ export const LocationContextProvider = ({ children }) => {
       value={{
         location,
         getArea,
+        getCountry,
         countries,
+        country,
         area,
       }}>
       {children}
