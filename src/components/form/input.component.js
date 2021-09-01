@@ -17,7 +17,7 @@ export const InputComponent = ({ navigation }) => {
   const [sex, onChangeSex] = React.useState('');
   const [age, onChangeAge] = React.useState('');
   // const [area, onChangeLocation] = React.useState('');
-  const { location, getArea, area } = useContext(LocationContext);
+  const { countries, getArea, area } = useContext(LocationContext);
 
   const genderList = ['Male', 'Female'];
   const locationList = [
@@ -77,6 +77,7 @@ export const InputComponent = ({ navigation }) => {
     'West Virginia',
     'Wyoming',
   ];
+  const countryList = countries.map((country) => country.country);
   return (
     <SafeArea>
       <FormContainer>
@@ -129,6 +130,32 @@ export const InputComponent = ({ navigation }) => {
               }}
             />
           </Spacer>
+
+          <Spacer position="top" size="large">
+            <Text>Country</Text>
+          </Spacer>
+
+          <Spacer position="top" size="medium">
+            <SelectDropdown
+              // defaultValue={area}
+              data={countryList}
+              mode={'outlined'}
+              onSelect={(selectedItem, index) => {
+                getArea(selectedItem);
+              }}
+              sbuttonTextAfterSelection={(selectedItem, index) => {
+                // text represented after item is selected
+                // if data array is an array of objects then return selectedItem.property to render after item is selected
+                return selectedItem;
+              }}
+              rowTextForSelection={(item, index) => {
+                // text represented for each item in dropdown
+                // if data array is an array of objects then return item.property to represent item in dropdown
+                return item;
+              }}
+            />
+          </Spacer>
+
           <Spacer position="top" size="large">
             <Spacer position="bottom" size="medium">
               <Text>Age</Text>

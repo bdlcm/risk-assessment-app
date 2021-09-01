@@ -2,16 +2,26 @@
 /* eslint-disable react/jsx-no-undef */
 import React, { useState, useEffect } from 'react';
 
-import { getInfo } from '../services/requests.service';
+import { getInfo, getAllCountries } from '../services/requests.service';
 
 export const LocationContext = React.createContext();
 
 export const LocationContextProvider = ({ children }) => {
-  const [location, setLocation] = useState();
-  const [area, setArea] = useState();
+  const [location, setLocation] = useState([]);
+  const [area, setArea] = useState([]);
+  const [countries, setcountries] = useState([]);
 
   const getArea = (clickedArea) => {
     setArea(clickedArea);
+  };
+  const retrieveCountries = () => {
+    getAllCountries()
+      .then((res) => {
+        setcountries(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const retrieveLocation = () => {
@@ -27,13 +37,15 @@ export const LocationContextProvider = ({ children }) => {
 
   useEffect(() => {
     retrieveLocation();
-  }, []);
+    retrieveCountries();
+  }, [area]);
 
   return (
     <LocationContext.Provider
       value={{
         location,
         getArea,
+        countries,
         area,
       }}>
       {children}
