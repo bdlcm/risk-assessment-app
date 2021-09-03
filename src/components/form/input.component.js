@@ -17,7 +17,16 @@ export const InputComponent = ({ navigation }) => {
   const [sex, onChangeSex] = React.useState('');
   const [age, onChangeAge] = React.useState('');
   // const [area, onChangeLocation] = React.useState('');
-  const { countries, getArea, getCountry, area, country } = useContext(LocationContext);
+  const {
+    countries,
+    getArea,
+    retrieveCountries,
+    getCountry,
+    setCountryISO,
+    area,
+    country,
+    countryISO,
+  } = useContext(LocationContext);
 
   const genderList = ['Male', 'Female'];
   const locationList = [
@@ -78,6 +87,9 @@ export const InputComponent = ({ navigation }) => {
     'Wyoming',
   ];
   const countryList = countries.map((country) => country.country);
+  const iso = countries.map((country) => country.countryInfo.iso3);
+ 
+
   return (
     <SafeArea>
       <FormContainer>
@@ -106,7 +118,7 @@ export const InputComponent = ({ navigation }) => {
               }}
             />
           </Spacer>
-        
+
           <Spacer position="top" size="large">
             <Text>Country</Text>
           </Spacer>
@@ -118,6 +130,8 @@ export const InputComponent = ({ navigation }) => {
               mode={'outlined'}
               onSelect={(selectedItem, index) => {
                 getCountry(selectedItem);
+                setCountryISO(iso[index]);
+                console.log('iso', iso[index]);
               }}
               sbuttonTextAfterSelection={(selectedItem, index) => {
                 // text represented after item is selected
@@ -160,7 +174,6 @@ export const InputComponent = ({ navigation }) => {
               />
             </Spacer>
           )}
-
 
           <Spacer position="top" size="large">
             <Spacer position="bottom" size="medium">

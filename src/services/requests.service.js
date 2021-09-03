@@ -5,12 +5,22 @@ export const getInfo = (state) => {
   return fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      console.log('data', data, 'url', url);
+      console.log('data country info', data);
+
       return data;
     })
     .catch((err) => console.error(err));
 };
 
+export const getCountryInfo = (country) => {
+  let url = `https://corona.lmao.ninja/v3/covid-19/countries/${country}`;
+  return fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    })
+    .catch((err) => console.error(err));
+};
 export const getAllCountries = () => {
   let url = `https://corona.lmao.ninja/v3/covid-19/countries`;
   return fetch(url)
