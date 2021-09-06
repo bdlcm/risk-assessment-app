@@ -2,47 +2,70 @@
 /* eslint-disable no-unused-vars */
 import { SafeArea } from '../../components/utility/safe-area.components';
 import React, { useContext, useState, useEffect } from 'react';
-import { Text } from 'react-native';
 
+import { Text, FlatList, ScrollView } from 'react-native';
+import { CircleComponent } from '../../components/style/circle-animation.component';
 import { vaccineComputation } from '../../services/vaccine.service';
 import { LocationContext } from '../../context/results.context';
-
-import { getInfo } from '../../services/requests.service';
-
+import { MiniCardBody, Number, Label } from '../../components/style/mini-card.component';
 import { CardContainer, ResultCard } from '../../components/style/result-card.component';
-
+import { MiniCardContainer, MiniResultCard } from '../../components/style/mini-card.component';
 export const ResultsScreen = ({ route }) => {
   // eslint-disable-next-line react/prop-types
 
   const { age, sex, area, country } = route.params;
   // const { location, setLocation } = useState();
   const { location, retrieveCountry, countryInfo } = useContext(LocationContext);
-
-  const result = vaccineComputation(age, sex);
+  const results = vaccineComputation(age, sex, area);
 
   useEffect(() => {
-    const result = vaccineComputation(age, sex, area);
+    console.log('results', results);
     retrieveCountry();
   }, []);
 
   return (
+   
     <SafeArea>
-      <CardContainer>
-        <ResultCard>
-          <Text>Country: {countryInfo.country} </Text>
-          {countryInfo.country == 'USA' && <Text>Location: {area} </Text>}
+         <CardContainer>
+         <ScrollView>
+          <ResultCard>
+            <Text>Age: {age} </Text>
+            <Text>Sex: {sex} </Text>
+            <Text>Country: {countryInfo.country} </Text>
+            {countryInfo.country == 'USA' && <Text>Location: {area} </Text>}
+          </ResultCard>
+     
 
-          <Text>Current number of cases: {countryInfo.active} </Text>
-          {countryInfo.country == 'USA' && (
-            <Text>Current number in this state: {location.active} </Text>
-          )}
-        </ResultCard>
-        <ResultCard>
-          <Text>Age: {age} </Text>
-          <Text>Sex: {sex} </Text>
-          <Text>Result: {result} </Text>
-        </ResultCard>
-      </CardContainer>
-    </SafeArea>
+          <MiniCardContainer>
+            {countryInfo.country == 'USA' && (
+              <MiniResultCard>
+                <Number>{location.active} </Number>
+                <Label>Total Cases in {area} </Label>
+              </MiniResultCard>
+            )}
+
+            <MiniResultCard>
+              <Number>{countryInfo.active} </Number>
+              <Label>Total Active Cases </Label>
+            </MiniResultCard>
+
+            <MiniResultCard>
+              <Number>{countryInfo.cases} </Number>
+              <Label>Total Recorded Cases </Label>
+            </MiniResultCard>
+          </MiniCardContainer>
+          {results.map((item) => (
+            <MiniCardContainer key={item.id}>
+              <MiniResultCard>
+                <Number>{item.vaccine} </Number>
+                <Label>Vaccine </Label>
+                <CircleComponent arc={280}></CircleComponent>
+              </MiniResultCard>
+            </MiniCardContainer>
+          ))}
+            </ScrollView>
+        </CardContainer>
+     </SafeArea>
+   
   );
 };
