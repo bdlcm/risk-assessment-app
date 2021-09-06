@@ -30,8 +30,8 @@ export const Circle = styled.View`
 
 export const MiniResultCard = styled.View`
   padding: ${(props) => props.theme.space[4]};
-  background-color: #6c2be3;
-  border: 0.5px solid #6c2be3;
+  background-color: #5754D7;
+  border: 0.5px solid #5754D7;
   border-radius: 10px;
   color: white;
   flex: 1;

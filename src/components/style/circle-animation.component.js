@@ -11,8 +11,8 @@ export const CircleContainer = styled.View`
   margin: 0 auto;
 `;
 export const CircleNumber = styled.View`
-  left:24%;
-  top:45%;
+    left:24%;
+    bottom:5%;
   position: absolute;
   margin: 0 auto;
 `;
@@ -32,13 +32,13 @@ export const CircleComponent = ({ arc }) => {
 
   return (
     <CircleContainer>
-      <ReanimatedArc
+      {/* <ReanimatedArc
         color="white"
         diameter={200}
         width={10}
         arcSweepAngle={arc}
         lineCap="round"
-        rotation={arc}></ReanimatedArc>
+        rotation={arc}></ReanimatedArc> */}
       <CircleNumber>
         <CircleNumberText>{arc}</CircleNumberText>
       </CircleNumber>
