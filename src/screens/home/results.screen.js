@@ -13,6 +13,7 @@ import {
   Number,
   Label,
   AssessmentText,
+  VaccineResultsContainer,
 } from '../../components/style/mini-card.component';
 import {
   CardContainer,
@@ -40,7 +41,7 @@ export const ResultsScreen = ({ route }) => {
   const { graphInfo, retrieveGraphInfo } = useContext(GraphContext);
 
   const results = vaccineComputation(age, sex, area);
-   useEffect(() => {
+  useEffect(() => {
     retrieveCountry();
     retrieveGraphInfo();
     console.log(Object.values(graphInfo).map((n) => n / 1000));
@@ -67,24 +68,6 @@ export const ResultsScreen = ({ route }) => {
           </CardBackground>
 
           <AssessmentText>Location Assessment</AssessmentText>
-          <MiniCardContainer>
-            {countryInfo.country == 'USA' && (
-              <MiniResultCard>
-                <Number>{location.active} </Number>
-                <Label>Total Cases in {area} </Label>
-              </MiniResultCard>
-            )}
-
-            <MiniResultCard>
-              <Number>{countryInfo.active} </Number>
-              <Label>Total Active Cases </Label>
-            </MiniResultCard>
-
-            <MiniResultCard>
-              <Number>{countryInfo.cases} </Number>
-              <Label>Total Recorded Cases </Label>
-            </MiniResultCard>
-          </MiniCardContainer>
 
           <MiniCardContainer>
             <MiniResultCard>
@@ -123,6 +106,25 @@ export const ResultsScreen = ({ route }) => {
             </MiniResultCard>
           </MiniCardContainer>
 
+          <MiniCardContainer>
+            {countryInfo.country == 'USA' && (
+              <MiniResultCard>
+                <Number>{location.active} </Number>
+                <Label>Total Cases in {area} </Label>
+              </MiniResultCard>
+            )}
+
+            <MiniResultCard>
+              <Number>{countryInfo.active} </Number>
+              <Label>Total Active Cases </Label>
+            </MiniResultCard>
+
+            <MiniResultCard>
+              <Number>{countryInfo.cases} </Number>
+              <Label>Total Recorded Cases </Label>
+            </MiniResultCard>
+          </MiniCardContainer>
+
           <Spacer position="top" size="large">
             <AssessmentText>Vaccine Assessment</AssessmentText>
           </Spacer>
@@ -131,7 +133,12 @@ export const ResultsScreen = ({ route }) => {
               <MiniResultCard>
                 <Number>{item.vaccine} </Number>
                 <Label>Vaccine </Label>
-                <CircleComponent arc={item.risk}></CircleComponent>
+                {item.case.map((each) => (
+                  <VaccineResultsContainer key={each.id}>
+                    <Number >{each.risk} </Number>
+                    <Label>{each.se} </Label>
+                  </VaccineResultsContainer>
+                ))}
               </MiniResultCard>
             </MiniCardContainer>
           ))}
