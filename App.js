@@ -5,6 +5,8 @@ import React from 'react';
 import { Navigation } from './src/infrastructure/navigation';
 import { Provider } from 'react-native-paper';
 import { LocationContextProvider } from './src/context/results.context';
+import { GraphContextProvider } from './src/context/graph.context';
+
 // import { useFonts as useAbel, Abel_400Regular } from '@expo-google-fonts/abel';
 
 export default function App() {
@@ -20,7 +22,9 @@ export default function App() {
       <Provider>
         <ThemeProvider theme={theme}>
           <LocationContextProvider>
-            <Navigation />
+            <GraphContextProvider>
+              <Navigation />
+            </GraphContextProvider>
           </LocationContextProvider>
         </ThemeProvider>
         <ExpoStatusBar style="auto" />

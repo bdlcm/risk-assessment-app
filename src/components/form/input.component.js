@@ -15,7 +15,7 @@ import { Text } from 'react-native-paper';
 
 export const InputComponent = ({ navigation }) => {
   const [sex, onChangeSex] = React.useState('');
-  const [age, onChangeAge] = React.useState('');
+  const [age, onChangeAge] = React.useState(1);
   // const [area, onChangeLocation] = React.useState('');
   const {
     countries,
@@ -131,8 +131,7 @@ export const InputComponent = ({ navigation }) => {
               onSelect={(selectedItem, index) => {
                 getCountry(selectedItem);
                 setCountryISO(iso[index]);
-                console.log('iso', iso[index]);
-              }}
+               }}
               sbuttonTextAfterSelection={(selectedItem, index) => {
                 // text represented after item is selected
                 // if data array is an array of objects then return selectedItem.property to render after item is selected

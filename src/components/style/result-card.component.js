@@ -24,8 +24,10 @@ export const CardBackground = styled.View`
   left: 0;
 
   width: 100%;
-  height: 30%;
+  height: 10%;
 `;
+
+
 
 export const ResultCard = styled.View`
   padding: ${(props) => props.theme.space[1]};
@@ -41,3 +43,4 @@ export const ResultText = styled.Text`
   font-weight: ${(props) => props.theme.fontWeights.bold};
   color: black;
 `;
+ 

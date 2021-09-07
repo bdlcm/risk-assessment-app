@@ -5,8 +5,7 @@ export const getInfo = (state) => {
   return fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      console.log('data country info', data);
-
+ 
       return data;
     })
     .catch((err) => console.error(err));
@@ -27,6 +26,17 @@ export const getAllCountries = () => {
     .then((response) => response.json())
     .then((data) => {
       return data;
+    })
+    .catch((err) => console.error(err));
+};
+
+export const getHistoricalData = (country) => {
+  let url = `https://corona.lmao.ninja/v3/covid-19/historical/${country}?=lastdays=90`;
+  return fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+       
+      return data.timeline.cases;
     })
     .catch((err) => console.error(err));
 };
