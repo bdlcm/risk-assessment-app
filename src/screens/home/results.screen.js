@@ -40,8 +40,7 @@ export const ResultsScreen = ({ route }) => {
   const { graphInfo, retrieveGraphInfo } = useContext(GraphContext);
 
   const results = vaccineComputation(age, sex, area);
-
-  useEffect(() => {
+   useEffect(() => {
     retrieveCountry();
     retrieveGraphInfo();
     console.log(Object.values(graphInfo).map((n) => n / 1000));
@@ -120,12 +119,12 @@ export const ResultsScreen = ({ route }) => {
                 bezier
                 style={{}}
               />
-              <Number>Cases in last 90 days </Number>
+              <Number>Cases in last 90 days in {countryInfo.country} </Number>
             </MiniResultCard>
           </MiniCardContainer>
-        
+
           <Spacer position="top" size="large">
-          <AssessmentText>Vaccine Assessment</AssessmentText>
+            <AssessmentText>Vaccine Assessment</AssessmentText>
           </Spacer>
           {results.map((item) => (
             <MiniCardContainer key={item.id}>
