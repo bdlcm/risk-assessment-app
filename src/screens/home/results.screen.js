@@ -40,13 +40,15 @@ export const ResultsScreen = ({ route }) => {
   const { age, sex, area, country } = route.params;
   // const { location, setLocation } = useState();
   const { location, retrieveCountry, countryInfo, retrieveLocation } = useContext(LocationContext);
-  const { graphInfo, retrieveGraphInfo } = useContext(GraphContext);
+  const { graphInfo, vaccineInfo, retrieveGraphInfo, retrieveVaccineInfo } =
+    useContext(GraphContext);
   const results = vaccineComputation(age, sex, area);
   useEffect(() => {
     retrieveCountry();
     retrieveGraphInfo();
-
+    retrieveVaccineInfo();
     retrieveLocation();
+    console.log("vaccineInfo", vaccineInfo, graphInfo)
 
     console.log('location', location);
   }, []);
@@ -74,19 +76,6 @@ export const ResultsScreen = ({ route }) => {
           ))}
 
           <AssessmentText>Location Assessment</AssessmentText>
-
-          {graphInfo && (
-            <MiniCardContainer>
-              <MiniResultCard>
-                
-                <GraphComponent data={graphInfo}>
-
-                </GraphComponent>
-                <Number>Cases in last 90 days in {countryInfo.country} </Number>
-              </MiniResultCard>
-            </MiniCardContainer>
-          )}
-
           <MiniCardContainer>
             {countryInfo.country == 'USA' && (
               <MiniResultCard>
@@ -105,6 +94,23 @@ export const ResultsScreen = ({ route }) => {
               <Label>Total Recorded Cases </Label>
             </MiniResultCard>
           </MiniCardContainer>
+          {graphInfo && (
+            <MiniCardContainer>
+              <MiniResultCard>
+                <GraphComponent data={graphInfo}></GraphComponent>
+                <Number>Cases in last 90 days in {countryInfo.country} </Number>
+              </MiniResultCard>
+            </MiniCardContainer>
+          )}
+          {vaccineInfo && (
+            <MiniCardContainer>
+              <MiniResultCard>
+                <GraphComponent data={vaccineInfo}></GraphComponent>
+                <Number>Vaccinations in last 90 days in {countryInfo.country} </Number>
+              </MiniResultCard>
+            </MiniCardContainer>
+          )}
+  
         </ScrollView>
       </CardContainer>
     </SafeArea>

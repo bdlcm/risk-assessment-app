@@ -34,10 +34,21 @@ export const getHistoricalData = (country) => {
   return fetch(url)
     .then((response) => response.json())
     .then((data) => {
-         return data.timeline.cases;
-      
-      console.log("error with  data.timeline.cases;")
+      return data.timeline.cases;
+
+      console.log('error with  data.timeline.cases;');
     })
+    .catch((err) => console.error(err));
+};
+
+export const getVaccineData = (country) => {
+  let url = `https://corona.lmao.ninja/v3/covid-19/vaccine/coverage/countries/${country}?=lastdays=90`;
+  return fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      return data.timeline;
+
+     })
     .catch((err) => console.error(err));
 };
 
