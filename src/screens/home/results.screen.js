@@ -32,6 +32,8 @@ import {
   ContributionGraph,
 } from 'react-native-chart-kit';
 
+import { GraphComponent } from '../../components/graph.component';
+
 export const ResultsScreen = ({ route }) => {
   // eslint-disable-next-line react/prop-types
 
@@ -76,37 +78,10 @@ export const ResultsScreen = ({ route }) => {
           {graphInfo && (
             <MiniCardContainer>
               <MiniResultCard>
-                <LineChart
-                  data={{
-                    datasets: [
-                      {
-                        data: [...Object.values(graphInfo).map((n) => n / 1000)],
-                      },
-                    ],
-                  }}
-                  width={350} // from react-native
-                  height={220}
-                  yAxisSuffix="k"
-                  yAxisInterval={1} // optional, defaults to 1
-                  chartConfig={{
-                    backgroundColor: '#5754D7',
-                    backgroundGradientFrom: '#5754D7',
-                    backgroundGradientTo: '#5754D7',
-                    decimalPlaces: 2, // optional, defaults to 2dp
-                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    style: {
-                      borderRadius: 5,
-                    },
-                    propsForDots: {
-                      r: '4',
-                      strokeWidth: '1',
-                      stroke: '#5754D7',
-                    },
-                  }}
-                  bezier
-                  style={{}}
-                />
+                
+                <GraphComponent data={graphInfo}>
+
+                </GraphComponent>
                 <Number>Cases in last 90 days in {countryInfo.country} </Number>
               </MiniResultCard>
             </MiniCardContainer>
