@@ -37,74 +37,80 @@ export const ResultsScreen = ({ route }) => {
 
   const { age, sex, area, country } = route.params;
   // const { location, setLocation } = useState();
-  const { location, retrieveCountry, countryInfo } = useContext(LocationContext);
+  const { location, retrieveCountry, countryInfo, retrieveLocation } = useContext(LocationContext);
   const { graphInfo, retrieveGraphInfo } = useContext(GraphContext);
-
   const results = vaccineComputation(age, sex, area);
   useEffect(() => {
     retrieveCountry();
     retrieveGraphInfo();
-    console.log(Object.values(graphInfo).map((n) => n / 1000));
+
+    retrieveLocation();
+
+    console.log('location', location);
   }, []);
 
   return (
     <SafeArea>
       <CardContainer>
         <ScrollView>
-          <CardBackground>
-            <ResultCardBackground>
-              <ResultText>
-                {sex}, {age}{' '}
-              </ResultText>
-
-              {countryInfo.country != 'USA' && <ResultText> {countryInfo.country} </ResultText>}
-              {countryInfo.country == 'USA' && (
-                <ResultText>
-                  {' '}
-                  {area}, {countryInfo.country}{' '}
-                </ResultText>
-              )}
-            </ResultCardBackground>
-          </CardBackground>
+          <Spacer position="top" size="large">
+            <AssessmentText>Vaccine Assessment</AssessmentText>
+          </Spacer>
+          {results.map((item) => (
+            <MiniCardContainer key={item.id}>
+              <MiniResultCard>
+                <Number>{item.vaccine} </Number>
+                <Label>Vaccine </Label>
+                {item.case.map((each) => (
+                  <VaccineResultsContainer key={each.id}>
+                    <Number>{each.risk} </Number>
+                    <Label>{each.se} </Label>
+                  </VaccineResultsContainer>
+                ))}
+              </MiniResultCard>
+            </MiniCardContainer>
+          ))}
 
           <AssessmentText>Location Assessment</AssessmentText>
 
-          <MiniCardContainer>
-            <MiniResultCard>
-              <LineChart
-                data={{
-                  datasets: [
-                    {
-                      data: [...Object.values(graphInfo).map((n) => n / 1000)],
+          {graphInfo && (
+            <MiniCardContainer>
+              <MiniResultCard>
+                <LineChart
+                  data={{
+                    datasets: [
+                      {
+                        data: [...Object.values(graphInfo).map((n) => n / 1000)],
+                      },
+                    ],
+                  }}
+                  width={350} // from react-native
+                  height={220}
+                  yAxisSuffix="k"
+                  yAxisInterval={1} // optional, defaults to 1
+                  chartConfig={{
+                    backgroundColor: '#5754D7',
+                    backgroundGradientFrom: '#5754D7',
+                    backgroundGradientTo: '#5754D7',
+                    decimalPlaces: 2, // optional, defaults to 2dp
+                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                    style: {
+                      borderRadius: 5,
                     },
-                  ],
-                }}
-                width={350} // from react-native
-                height={220}
-                yAxisSuffix="k"
-                yAxisInterval={1} // optional, defaults to 1
-                chartConfig={{
-                  backgroundColor: '#5754D7',
-                  backgroundGradientFrom: '#5754D7',
-                  backgroundGradientTo: '#5754D7',
-                  decimalPlaces: 2, // optional, defaults to 2dp
-                  color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                  labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                  style: {
-                    borderRadius: 5,
-                  },
-                  propsForDots: {
-                    r: '4',
-                    strokeWidth: '1',
-                    stroke: '#5754D7',
-                  },
-                }}
-                bezier
-                style={{}}
-              />
-              <Number>Cases in last 90 days in {countryInfo.country} </Number>
-            </MiniResultCard>
-          </MiniCardContainer>
+                    propsForDots: {
+                      r: '4',
+                      strokeWidth: '1',
+                      stroke: '#5754D7',
+                    },
+                  }}
+                  bezier
+                  style={{}}
+                />
+                <Number>Cases in last 90 days in {countryInfo.country} </Number>
+              </MiniResultCard>
+            </MiniCardContainer>
+          )}
 
           <MiniCardContainer>
             {countryInfo.country == 'USA' && (
@@ -124,24 +130,6 @@ export const ResultsScreen = ({ route }) => {
               <Label>Total Recorded Cases </Label>
             </MiniResultCard>
           </MiniCardContainer>
-
-          <Spacer position="top" size="large">
-            <AssessmentText>Vaccine Assessment</AssessmentText>
-          </Spacer>
-          {results.map((item) => (
-            <MiniCardContainer key={item.id}>
-              <MiniResultCard>
-                <Number>{item.vaccine} </Number>
-                <Label>Vaccine </Label>
-                {item.case.map((each) => (
-                  <VaccineResultsContainer key={each.id}>
-                    <Number >{each.risk} </Number>
-                    <Label>{each.se} </Label>
-                  </VaccineResultsContainer>
-                ))}
-              </MiniResultCard>
-            </MiniCardContainer>
-          ))}
         </ScrollView>
       </CardContainer>
     </SafeArea>

@@ -18,8 +18,7 @@ export const CircleNumber = styled.View`
 `;
 
 export const CircleNumberText = styled.Text`
-  font-family: ${(props) => props.theme.fonts.heading};
-  font-size: ${(props) => props.theme.fontSizes.heading};
+   font-size: ${(props) => props.theme.fontSizes.heading};
   font-weight: ${(props) => props.theme.fontWeights.bold};
 
   color: ${(props) => props.theme.colors.ui.quaternary};

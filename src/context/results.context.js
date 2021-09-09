@@ -72,6 +72,7 @@ export const LocationContextProvider = ({ children }) => {
         getArea,
         getCountry,
         retrieveCountry,
+        retrieveLocation,
         setCountryISO,
         countryInfo,
         countryISO,

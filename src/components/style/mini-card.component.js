@@ -6,24 +6,21 @@ export const MiniCardContainer = styled.View`
 `;
 
 export const Label = styled.Text`
-  font-family: ${(props) => props.theme.fonts.body};
-  font-size: ${(props) => props.theme.fontSizes.caption};
+   font-size: ${(props) => props.theme.fontSizes.caption};
   font-weight: ${(props) => props.theme.fontWeights.regular};
 
   color: ${(props) => props.theme.colors.ui.quaternary};
 `;
 
 export const Number = styled.Text`
-  font-family: ${(props) => props.theme.fonts.heading};
-  font-size: ${(props) => props.theme.fontSizes.heading};
+   font-size: ${(props) => props.theme.fontSizes.heading};
   font-weight: ${(props) => props.theme.fontWeights.bold};
 
   color: ${(props) => props.theme.colors.ui.quaternary};
 `;
 
 export const AssessmentText = styled.Text`
-  font-family: ${(props) => props.theme.fonts.heading};
-  font-size: ${(props) => props.theme.fontSizes.heading};
+   font-size: ${(props) => props.theme.fontSizes.heading};
 
   color: ${(props) => props.theme.colors.brand.primary};
   margin: ${(props) => props.theme.space[2]};

@@ -5,7 +5,6 @@ export const getInfo = (state) => {
   return fetch(url)
     .then((response) => response.json())
     .then((data) => {
- 
       return data;
     })
     .catch((err) => console.error(err));
@@ -35,8 +34,9 @@ export const getHistoricalData = (country) => {
   return fetch(url)
     .then((response) => response.json())
     .then((data) => {
-       
-      return data.timeline.cases;
+         return data.timeline.cases;
+      
+      console.log("error with  data.timeline.cases;")
     })
     .catch((err) => console.error(err));
 };

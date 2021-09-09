@@ -7,21 +7,22 @@ export const GraphContext = React.createContext();
 
 export const GraphContextProvider = ({ children }) => {
   const { country } = useContext(LocationContext);
-  const [graphInfo, setGraphInfo] = useState([]);
+  const [graphInfo, setGraphInfo] = useState({
+    '8/10/21': 183347,
+  });
 
   const retrieveGraphInfo = () => {
     getHistoricalData(country)
       .then((res) => {
         setGraphInfo(res);
-       })
+        console.log('graph info', res);
+      })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  useEffect(() => {
- 
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <GraphContext.Provider
