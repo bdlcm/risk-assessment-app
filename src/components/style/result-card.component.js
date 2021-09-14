@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 export const CardContainer = styled.View`
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.7);
+  
   padding: ${(props) => props.theme.space[2]};
   text-align: center;
   position: absolute;

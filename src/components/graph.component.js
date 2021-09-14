@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  LineChart,
-
-} from 'react-native-chart-kit';
+import { LineChart } from 'react-native-chart-kit';
 
 export const GraphComponent = ({ data }) => {
   return (
@@ -11,28 +8,28 @@ export const GraphComponent = ({ data }) => {
         data={{
           datasets: [
             {
-              data: [...Object.values(data).map((n) => n / 1000)],
+              data: [...Object.values(data).map((n) => Math.round(n / 1000))],
             },
           ],
         }}
         width={350} // from react-native
         height={220}
         yAxisSuffix="k"
-        yAxisInterval={1} // optional, defaults to 1
+        yAxisInterval={1000} // optional, defaults to 1
         chartConfig={{
-          backgroundColor: '#5754D7',
-          backgroundGradientFrom: '#5754D7',
-          backgroundGradientTo: '#5754D7',
+          backgroundColor: 'white',
+          backgroundGradientFrom: 'white',
+          backgroundGradientTo: 'white',
           decimalPlaces: 2, // optional, defaults to 2dp
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          color: (opacity = 0.6) => `rgba(199, 43, 97, ${opacity})`,
+          labelColor: (opacity = 0.6) => `rgba(0, 0, 0, ${opacity})`,
           style: {
             borderRadius: 5,
           },
           propsForDots: {
-            r: '4',
+            r: '2',
             strokeWidth: '1',
-            stroke: '#5754D7',
+            stroke: '#C72B61',
           },
         }}
         bezier

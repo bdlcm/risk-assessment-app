@@ -2,35 +2,27 @@
 /* eslint-disable no-unused-vars */
 import { SafeArea } from '../../components/utility/safe-area.components';
 import React, { useContext, useState, useEffect } from 'react';
-import { Dimensions } from 'react-native';
 import { Spacer } from '../../components/style/spacer.component';
 import { Text, FlatList, ScrollView } from 'react-native';
-import { CircleComponent } from '../../components/style/circle-animation.component';
 import { vaccineComputation } from '../../services/vaccine.service';
 import { LocationContext } from '../../context/results.context';
 import {
   MiniCardBody,
   Number,
   Label,
+  VaccineNumber,
+  VaccineLabel,
   AssessmentText,
   VaccineResultsContainer,
 } from '../../components/style/mini-card.component';
+import { CardContainer } from '../../components/style/result-card.component';
 import {
-  CardContainer,
-  ResultCard,
-  CardBackground,
-  ResultCardBackground,
-  ResultText,
-} from '../../components/style/result-card.component';
-import { MiniCardContainer, MiniResultCard } from '../../components/style/mini-card.component';
+  MiniCardContainer,
+  MiniResultCard,
+  MiniResultCard2,
+  WhiteResultCard,
+} from '../../components/style/mini-card.component';
 import { GraphContext } from '../../context/graph.context';
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-} from 'react-native-chart-kit';
 
 import { GraphComponent } from '../../components/graph.component';
 
@@ -48,7 +40,7 @@ export const ResultsScreen = ({ route }) => {
     retrieveGraphInfo();
     retrieveVaccineInfo();
     retrieveLocation();
-    console.log("vaccineInfo", vaccineInfo, graphInfo)
+    console.log('vaccineInfo', vaccineInfo, graphInfo);
 
     console.log('location', location);
   }, []);
@@ -62,55 +54,79 @@ export const ResultsScreen = ({ route }) => {
           </Spacer>
           {results.map((item) => (
             <MiniCardContainer key={item.id}>
-              <MiniResultCard>
-                <Number>{item.vaccine} </Number>
-                <Label>Vaccine </Label>
-                {item.case.map((each) => (
-                  <VaccineResultsContainer key={each.id}>
-                    <Number>{each.risk} </Number>
-                    <Label>{each.se} </Label>
-                  </VaccineResultsContainer>
-                ))}
-              </MiniResultCard>
+              {item.color == 2 && (
+                <MiniResultCard2>
+                  <VaccineNumber>{item.vaccine} </VaccineNumber>
+                  <VaccineLabel>Vaccine </VaccineLabel>
+                  {item.case.map((each) => (
+                    <VaccineResultsContainer key={each.id}>
+                      {each.risk ? (
+                        <VaccineNumber>{each.risk} </VaccineNumber>
+                      ) : (
+                        <VaccineNumber>No increased risk </VaccineNumber>
+                      )}
+                      <VaccineLabel>{each.se} </VaccineLabel>
+                    </VaccineResultsContainer>
+                  ))}
+                </MiniResultCard2>
+              )}
+
+              {item.color == 3 && (
+                <MiniResultCard>
+                  <VaccineNumber>{item.vaccine} </VaccineNumber>
+                  <VaccineLabel>Vaccine </VaccineLabel>
+                  {item.case.map((each) => (
+                    <VaccineResultsContainer key={each.id}>
+                      {each.risk ? (
+                        <VaccineNumber>{each.risk} </VaccineNumber>
+                      ) : (
+                        <VaccineNumber>No increased risk </VaccineNumber>
+                      )}
+                      <VaccineLabel>{each.se} </VaccineLabel>
+                    </VaccineResultsContainer>
+                  ))}
+                </MiniResultCard>
+              )}
             </MiniCardContainer>
           ))}
 
-          <AssessmentText>Location Assessment</AssessmentText>
+          <Spacer position="top" size="large">
+            <AssessmentText>Location Assessment</AssessmentText>
+          </Spacer>
           <MiniCardContainer>
             {countryInfo.country == 'USA' && (
-              <MiniResultCard>
+              <WhiteResultCard>
                 <Number>{location.active} </Number>
                 <Label>Total Cases in {area} </Label>
-              </MiniResultCard>
+              </WhiteResultCard>
             )}
 
-            <MiniResultCard>
+            <WhiteResultCard>
               <Number>{countryInfo.active} </Number>
               <Label>Total Active Cases </Label>
-            </MiniResultCard>
+            </WhiteResultCard>
 
-            <MiniResultCard>
+            <WhiteResultCard>
               <Number>{countryInfo.cases} </Number>
               <Label>Total Recorded Cases </Label>
-            </MiniResultCard>
+            </WhiteResultCard>
           </MiniCardContainer>
           {graphInfo && (
             <MiniCardContainer>
-              <MiniResultCard>
+              <WhiteResultCard>
                 <GraphComponent data={graphInfo}></GraphComponent>
                 <Number>Cases in last 90 days in {countryInfo.country} </Number>
-              </MiniResultCard>
+              </WhiteResultCard>
             </MiniCardContainer>
           )}
           {vaccineInfo && (
             <MiniCardContainer>
-              <MiniResultCard>
+              <WhiteResultCard>
                 <GraphComponent data={vaccineInfo}></GraphComponent>
                 <Number>Vaccinations in last 90 days in {countryInfo.country} </Number>
-              </MiniResultCard>
+              </WhiteResultCard>
             </MiniCardContainer>
           )}
-  
         </ScrollView>
       </CardContainer>
     </SafeArea>

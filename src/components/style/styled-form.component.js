@@ -19,8 +19,8 @@ export const FormVeil = styled.View`
 `;
 
 export const FormButton = styled(Button).attrs({})`
-  background-color: #5754d7;
-  color: white;
+  background-color: #C72C62;
+  
   padding: ${(props) => props.theme.space[2]};
   margin-bottom: 5px;
   margin-top: 15px;
