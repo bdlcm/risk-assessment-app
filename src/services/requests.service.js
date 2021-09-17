@@ -36,8 +36,7 @@ export const getHistoricalData = (country) => {
     .then((data) => {
       return data.timeline.cases;
 
-      console.log('error with  data.timeline.cases;');
-    })
+     })
     .catch((err) => console.error(err));
 };
 

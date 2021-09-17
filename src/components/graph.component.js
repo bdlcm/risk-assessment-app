@@ -21,7 +21,7 @@ export const GraphComponent = ({ data }) => {
           backgroundGradientFrom: 'white',
           backgroundGradientTo: 'white',
           decimalPlaces: 2, // optional, defaults to 2dp
-          color: (opacity = 0.6) => `rgba(199, 43, 97, ${opacity})`,
+          color: (opacity = 0.6) => `rgba(41, 137, 255, ${opacity})`,
           labelColor: (opacity = 0.6) => `rgba(0, 0, 0, ${opacity})`,
           style: {
             borderRadius: 5,
@@ -29,7 +29,7 @@ export const GraphComponent = ({ data }) => {
           propsForDots: {
             r: '2',
             strokeWidth: '1',
-            stroke: '#C72B61',
+            stroke: '#2989FF',
           },
         }}
         bezier

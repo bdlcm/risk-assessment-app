@@ -29,7 +29,7 @@ export const FormVeil = styled.View`
 `;
 
 export const FormButton = styled(Button).attrs({})`
-  background-color: #C72C62;
+  background-color: #rgb(41, 137, 255);
   align-self: center;
 
   padding: ${(props) => props.theme.space[2]};
@@ -60,5 +60,12 @@ const y = 0;
 export const FormCenter = styled.View`
   position: relative;
   display: flex;
+ 
+
+ `;
+
+ export const InputFormCenter = styled.View`
+  margin:0 auto;
+ 
 
  `;

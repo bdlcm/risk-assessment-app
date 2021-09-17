@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator();
 
 export const Navigator = () => (
   <NavigationContainer>
-    <Stack.Navigator>
+    <Stack.Navigator >
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Results" component={ResultsScreen} />
     </Stack.Navigator>

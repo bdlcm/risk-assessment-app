@@ -7,6 +7,8 @@ import {
   FormContainer,
   FormButton,
   FormCenter,
+  FormDropdown,
+  InputFormCenter,
 } from '../../components/style/styled-form.component';
 import SelectDropdown from 'react-native-select-dropdown';
 import NumericInput from 'react-native-numeric-input';
@@ -88,7 +90,6 @@ export const InputComponent = ({ navigation }) => {
   ];
   const countryList = countries.map((country) => country.country);
   const iso = countries.map((country) => country.countryInfo.iso3);
- 
 
   return (
     <SafeArea>
@@ -99,66 +100,13 @@ export const InputComponent = ({ navigation }) => {
           </Spacer>
 
           <Spacer position="top" size="medium">
-            <SelectDropdown
-              defaultValue={sex}
-              data={genderList}
-              mode={'outlined'}
-              onSelect={(selectedItem, index) => {
-                onChangeSex(selectedItem);
-              }}
-              sbuttonTextAfterSelection={(selectedItem, index) => {
-                // text represented after item is selected
-                // if data array is an array of objects then return selectedItem.property to render after item is selected
-                return selectedItem;
-              }}
-              rowTextForSelection={(item, index) => {
-                // text represented for each item in dropdown
-                // if data array is an array of objects then return item.property to represent item in dropdown
-                return item;
-              }}
-            />
-          </Spacer>
-
-          <Spacer position="top" size="large">
-            <Text>Country</Text>
-          </Spacer>
-
-          <Spacer position="top" size="medium">
-            <SelectDropdown
-              defaultValue={country}
-              data={countryList}
-              mode={'outlined'}
-              onSelect={(selectedItem, index) => {
-                getCountry(selectedItem);
-                setCountryISO(iso[index]);
-               }}
-              sbuttonTextAfterSelection={(selectedItem, index) => {
-                // text represented after item is selected
-                // if data array is an array of objects then return selectedItem.property to render after item is selected
-                return selectedItem;
-              }}
-              rowTextForSelection={(item, index) => {
-                // text represented for each item in dropdown
-                // if data array is an array of objects then return item.property to represent item in dropdown
-                return item;
-              }}
-            />
-          </Spacer>
-
-          {country == 'USA' && (
-            <Spacer position="top" size="large">
-              <Text>State</Text>
-            </Spacer>
-          )}
-
-          {country == 'USA' && (
-            <Spacer position="top" size="medium">
+            <InputFormCenter>
               <SelectDropdown
-                defaultValue={area}
-                data={locationList}
+                defaultValue={sex}
+                data={genderList}
                 mode={'outlined'}
                 onSelect={(selectedItem, index) => {
-                  getArea(selectedItem);
+                  onChangeSex(selectedItem);
                 }}
                 sbuttonTextAfterSelection={(selectedItem, index) => {
                   // text represented after item is selected
@@ -171,6 +119,66 @@ export const InputComponent = ({ navigation }) => {
                   return item;
                 }}
               />
+            </InputFormCenter>
+          </Spacer>
+
+          <Spacer position="top" size="large">
+            <Text>Country</Text>
+          </Spacer>
+
+          <Spacer position="top" size="medium">
+            <InputFormCenter>
+              <FormDropdown
+                defaultValue={country}
+                data={countryList}
+                mode={'outlined'}
+                dropdownStyle={'No'}
+                onSelect={(selectedItem, index) => {
+                  getCountry(selectedItem);
+                  setCountryISO(iso[index]);
+                }}
+                sbuttonTextAfterSelection={(selectedItem, index) => {
+                  // text represented after item is selected
+                  // if data array is an array of objects then return selectedItem.property to render after item is selected
+                  return selectedItem;
+                }}
+                rowTextForSelection={(item, index) => {
+                  // text represented for each item in dropdown
+                  // if data array is an array of objects then return item.property to represent item in dropdown
+                  return item;
+                }}
+              />
+            </InputFormCenter>
+          </Spacer>
+
+          {country == 'USA' && (
+            <Spacer position="top" size="large">
+              <Text>State</Text>
+            </Spacer>
+          )}
+
+          {country == 'USA' && (
+            <Spacer position="top" size="medium">
+              <InputFormCenter>
+                <SelectDropdown
+                  defaultValue={area}
+                  data={locationList}
+                  mode={'outlined'}
+                  onSelect={(selectedItem, index) => {
+                    getArea(selectedItem);
+                  }}
+                  sbuttonTextAfterSelection={(selectedItem, index) => {
+                    // text represented after item is selected
+                    // if data array is an array of objects then return selectedItem.property to render after item is selected
+                    return selectedItem;
+                  }}
+                  rowTextForSelection={(item, index) => {
+                    // text represented for each item in dropdown
+                    // if data array is an array of objects then return item.property to represent item in dropdown
+                    return item;
+                  }}
+                />
+              </InputFormCenter>
             </Spacer>
           )}
 
@@ -188,13 +196,14 @@ export const InputComponent = ({ navigation }) => {
               step={1}
               valueType="real"
               minValue={1}
-              iconStyle={{ color: '#6C2BE3' }}
+              iconStyle={{ color: '#29A3FF' }}
             />
           </Spacer>
         </FormCenter>
 
         <FormButton
           mode="contained"
+          disabled={!sex || !country}
           onPress={() => navigation.navigate('Results', { age: age, sex: sex, area: area })}>
           Next
         </FormButton>

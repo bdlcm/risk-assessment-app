@@ -28,7 +28,13 @@ export const Label = styled.Text`
 
 export const Number = styled.Text`
   font-size: ${(props) => props.theme.fontSizes.heading};
-  color: black;
+  color: #2989FF;
+  font-weight: ${(props) => props.theme.fontWeights.bold};
+
+`;
+export const SmallNumber = styled.Text`
+  font-size: ${(props) => props.theme.fontSizes.body};
+  color: #2989FF;
   font-weight: ${(props) => props.theme.fontWeights.bold};
 
 `;
@@ -50,7 +56,7 @@ export const Circle = styled.View`
 
 export const MiniResultCard = styled.View`
   padding: ${(props) => props.theme.space[4]};
-  background-color: #C72B61;
+  background-color: #F05687;
   
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.26);
 
@@ -62,7 +68,7 @@ export const MiniResultCard = styled.View`
 `;
 export const MiniResultCard2 = styled.View`
   padding: ${(props) => props.theme.space[4]};
-  background-color: #CF8155
+  background-color: #FAAF75
   ;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.26);
   border-radius: 10px;
@@ -79,7 +85,16 @@ export const WhiteResultCard = styled.View`
   border-radius: 10px;
    color: white;
   flex: 1;
+  margin: ${(props) => props.theme.space[2]};
+`;
 
+export const SmallWhiteResultCard = styled.View`
+  padding: ${(props) => props.theme.space[2]};
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.26);
+  background-color: white;
+  border-radius: 10px;
+   color: white;
+  flex: 1;
   margin: ${(props) => props.theme.space[2]};
 `;
 

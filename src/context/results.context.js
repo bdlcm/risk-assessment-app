@@ -7,8 +7,8 @@ import { getInfo, getAllCountries, getCountryInfo } from '../services/requests.s
 export const LocationContext = React.createContext();
 
 export const LocationContextProvider = ({ children }) => {
-  const [area, setArea] = useState([]);
-  const [country, setCountry] = useState([]);
+  const [area, setArea] = useState();
+  const [country, setCountry] = useState();
   const [countryISO, setCountryISO] = useState([]);
 
   const [countryInfo, setcountryInfo] = useState([]);
