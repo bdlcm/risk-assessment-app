@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 export const MiniCardContainer = styled.View`
-  margin-top: 8;
-  flex-direction: row;
+   flex-direction: row;
   justify-content: space-between;
 `;
 
@@ -13,6 +12,13 @@ export const VaccineLabel = styled.Text`
 `;
 
 export const VaccineNumber = styled.Text`
+  font-size: ${(props) => props.theme.fontSizes.attention};
+  font-weight: ${(props) => props.theme.fontWeights.bold};
+
+  color: white;
+`;
+
+export const WhiteNumber = styled.Text`
   font-size: ${(props) => props.theme.fontSizes.heading};
   font-weight: ${(props) => props.theme.fontWeights.bold};
 
@@ -99,5 +105,9 @@ export const SmallWhiteResultCard = styled.View`
 `;
 
 export const VaccineResultsContainer = styled.View`
+  align-items: flex-end;
+`;
+
+export const CircleInfo = styled.View`
   align-items: flex-end;
 `;

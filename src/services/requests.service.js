@@ -35,8 +35,7 @@ export const getHistoricalData = (country) => {
     .then((response) => response.json())
     .then((data) => {
       return data.timeline.cases;
-
-     })
+    })
     .catch((err) => console.error(err));
 };
 
@@ -46,8 +45,7 @@ export const getVaccineData = (country) => {
     .then((response) => response.json())
     .then((data) => {
       return data.timeline;
-
-     })
+    })
     .catch((err) => console.error(err));
 };
 

@@ -92,21 +92,79 @@ export const InputComponent = ({ navigation }) => {
   const iso = countries.map((country) => country.countryInfo.iso3);
 
   return (
-    <SafeArea>
-      <FormContainer>
-        <FormCenter>
-          <Spacer position="top" size="large">
-            <Text>Sex</Text>
-          </Spacer>
+    <FormContainer>
+      <FormCenter>
+        <Spacer position="top" size="large">
+          <Text>Sex</Text>
+        </Spacer>
 
+        <Spacer position="top" size="medium">
+          <InputFormCenter>
+            <SelectDropdown
+              defaultValue={sex}
+              data={genderList}
+              mode={'outlined'}
+              onSelect={(selectedItem, index) => {
+                onChangeSex(selectedItem);
+              }}
+              sbuttonTextAfterSelection={(selectedItem, index) => {
+                // text represented after item is selected
+                // if data array is an array of objects then return selectedItem.property to render after item is selected
+                return selectedItem;
+              }}
+              rowTextForSelection={(item, index) => {
+                // text represented for each item in dropdown
+                // if data array is an array of objects then return item.property to represent item in dropdown
+                return item;
+              }}
+            />
+          </InputFormCenter>
+        </Spacer>
+
+        <Spacer position="top" size="large">
+          <Text>Country</Text>
+        </Spacer>
+
+        <Spacer position="top" size="medium">
+          <InputFormCenter>
+            <FormDropdown
+              defaultValue={country}
+              data={countryList}
+              mode={'outlined'}
+              dropdownStyle={'No'}
+              onSelect={(selectedItem, index) => {
+                getCountry(selectedItem);
+                setCountryISO(iso[index]);
+              }}
+              sbuttonTextAfterSelection={(selectedItem, index) => {
+                // text represented after item is selected
+                // if data array is an array of objects then return selectedItem.property to render after item is selected
+                return selectedItem;
+              }}
+              rowTextForSelection={(item, index) => {
+                // text represented for each item in dropdown
+                // if data array is an array of objects then return item.property to represent item in dropdown
+                return item;
+              }}
+            />
+          </InputFormCenter>
+        </Spacer>
+
+        {country == 'USA' && (
+          <Spacer position="top" size="large">
+            <Text>State</Text>
+          </Spacer>
+        )}
+
+        {country == 'USA' && (
           <Spacer position="top" size="medium">
             <InputFormCenter>
               <SelectDropdown
-                defaultValue={sex}
-                data={genderList}
+                defaultValue={area}
+                data={locationList}
                 mode={'outlined'}
                 onSelect={(selectedItem, index) => {
-                  onChangeSex(selectedItem);
+                  getArea(selectedItem);
                 }}
                 sbuttonTextAfterSelection={(selectedItem, index) => {
                   // text represented after item is selected
@@ -121,76 +179,18 @@ export const InputComponent = ({ navigation }) => {
               />
             </InputFormCenter>
           </Spacer>
+        )}
 
-          <Spacer position="top" size="large">
-            <Text>Country</Text>
+        <Spacer position="top" size="large">
+          <Spacer position="bottom" size="medium">
+            <Text>Age</Text>
           </Spacer>
-
-          <Spacer position="top" size="medium">
-            <InputFormCenter>
-              <FormDropdown
-                defaultValue={country}
-                data={countryList}
-                mode={'outlined'}
-                dropdownStyle={'No'}
-                onSelect={(selectedItem, index) => {
-                  getCountry(selectedItem);
-                  setCountryISO(iso[index]);
-                }}
-                sbuttonTextAfterSelection={(selectedItem, index) => {
-                  // text represented after item is selected
-                  // if data array is an array of objects then return selectedItem.property to render after item is selected
-                  return selectedItem;
-                }}
-                rowTextForSelection={(item, index) => {
-                  // text represented for each item in dropdown
-                  // if data array is an array of objects then return item.property to represent item in dropdown
-                  return item;
-                }}
-              />
-            </InputFormCenter>
-          </Spacer>
-
-          {country == 'USA' && (
-            <Spacer position="top" size="large">
-              <Text>State</Text>
-            </Spacer>
-          )}
-
-          {country == 'USA' && (
-            <Spacer position="top" size="medium">
-              <InputFormCenter>
-                <SelectDropdown
-                  defaultValue={area}
-                  data={locationList}
-                  mode={'outlined'}
-                  onSelect={(selectedItem, index) => {
-                    getArea(selectedItem);
-                  }}
-                  sbuttonTextAfterSelection={(selectedItem, index) => {
-                    // text represented after item is selected
-                    // if data array is an array of objects then return selectedItem.property to render after item is selected
-                    return selectedItem;
-                  }}
-                  rowTextForSelection={(item, index) => {
-                    // text represented for each item in dropdown
-                    // if data array is an array of objects then return item.property to represent item in dropdown
-                    return item;
-                  }}
-                />
-              </InputFormCenter>
-            </Spacer>
-          )}
-
-          <Spacer position="top" size="large">
-            <Spacer position="bottom" size="medium">
-              <Text>Age</Text>
-            </Spacer>
+          <InputFormCenter>
             <NumericInput
               value={age}
               onChange={onChangeAge}
               onLimitReached={(isMax, msg) => console.log(isMax, msg)}
-              totalWidth={365}
+              totalWidth={300}
               totalHeight={50}
               iconSize={25}
               step={1}
@@ -198,16 +198,16 @@ export const InputComponent = ({ navigation }) => {
               minValue={1}
               iconStyle={{ color: '#29A3FF' }}
             />
-          </Spacer>
-        </FormCenter>
+          </InputFormCenter>
+        </Spacer>
+      </FormCenter>
 
-        <FormButton
-          mode="contained"
-          disabled={!sex || !country}
-          onPress={() => navigation.navigate('Results', { age: age, sex: sex, area: area })}>
-          Next
-        </FormButton>
-      </FormContainer>
-    </SafeArea>
+      <FormButton
+        mode="contained"
+        disabled={!sex || !country}
+        onPress={() => navigation.navigate('Results', { age: age, sex: sex, area: area })}>
+        Next
+      </FormButton>
+    </FormContainer>
   );
 };

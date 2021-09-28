@@ -35,6 +35,15 @@ export const vaccineComputation = (age, sex) => {
     if (age <= 50) {
       return [
         {
+          vaccine: 'Pfizer/Biontech',
+          color: 2,
+          case: [
+            { risk: undefined, se: 'Cerebral Thrombosis' },
+            { risk: undefined, se: 'General Thrombosis' },
+            { risk: 1.3, se: 'Guillain Barre' },
+          ],
+        },
+        {
           vaccine: 'Moderna',
           color: 2,
 
@@ -44,15 +53,7 @@ export const vaccineComputation = (age, sex) => {
             { risk: 1.4, se: 'Guillain Barre' },
           ],
         },
-        {
-          vaccine: 'Pfizer/Biontech',
-          color: 2,
-          case: [
-            { risk: undefined, se: 'Cerebral Thrombosis' },
-            { risk: undefined, se: 'General Thrombosis' },
-            { risk: 1.3, se: 'Guillain Barre' },
-          ],
-        },
+
         {
           vaccine: 'Johnson & Johnson',
           color: 3,

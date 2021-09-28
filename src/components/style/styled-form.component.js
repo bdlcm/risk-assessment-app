@@ -54,8 +54,7 @@ export const FormInput = styled(TextInput)`
   width: 100%;
 `;
 
-const x = -50;
-const y = 0;
+ 
 
 export const FormCenter = styled.View`
   position: relative;
