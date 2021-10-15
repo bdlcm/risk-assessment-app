@@ -19,11 +19,11 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "de.charite.vaccineprofileapp",
-      "buildNumber": "1.0.4"
+      "buildNumber": "1.0.5"
     },
     "android": {
       "package": "de.charite.vaccineprofileapp",
-      "versionCode": 4,
+      "versionCode": 5,
       "permissions": [],
 
       "adaptiveIcon": {

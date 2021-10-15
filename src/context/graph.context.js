@@ -2,11 +2,18 @@
 /* eslint-disable react/jsx-no-undef */
 import React, { useState, useEffect, useContext } from 'react';
 import { LocationContext } from './results.context';
-import { getHistoricalData, getVaccineData } from '../services/requests.service';
+import {
+  getHistoricalData,
+  getHistoricalStateData,
+  getVaccineData,
+} from '../services/requests.service';
 export const GraphContext = React.createContext();
 
 export const GraphContextProvider = ({ children }) => {
-  const { country } = useContext(LocationContext);
+  const { country, area } = useContext(LocationContext);
+  const [stateInfo, setStateInfo] = useState({
+    '8/10/21': 183347,
+  });
   const [graphInfo, setGraphInfo] = useState({
     '8/10/21': 183347,
   });
@@ -20,6 +27,17 @@ export const GraphContextProvider = ({ children }) => {
       .then((res) => {
         setGraphInfo(res);
         console.log('graph info', res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const retrieveStateGraphInfo = () => {
+    getHistoricalStateData(area)
+      .then((res) => {
+        setStateInfo(res);
+        console.log('state info', res);
       })
       .catch((err) => {
         console.log(err);
@@ -44,8 +62,10 @@ export const GraphContextProvider = ({ children }) => {
       value={{
         graphInfo,
         vaccineInfo,
+        stateInfo,
         retrieveGraphInfo,
         retrieveVaccineInfo,
+        retrieveStateGraphInfo,
       }}>
       {children}
     </GraphContext.Provider>

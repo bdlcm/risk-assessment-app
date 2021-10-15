@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect, useContext } from 'react';
-import { SafeArea } from '../utility/safe-area.components';
+import React, { useContext } from 'react';
 import { LocationContext } from '../../context/results.context';
 import {
   FormContainer,
@@ -10,9 +9,12 @@ import {
   FormDropdown,
   InputFormCenter,
 } from '../../components/style/styled-form.component';
+import {SourceLabel} from '../../components/style/mini-card.component';
 import SelectDropdown from 'react-native-select-dropdown';
 import NumericInput from 'react-native-numeric-input';
 import { Spacer } from '../style/spacer.component';
+import { TouchableOpacity } from 'react-native';
+
 import { Text } from 'react-native-paper';
 
 export const InputComponent = ({ navigation }) => {
@@ -200,6 +202,11 @@ export const InputComponent = ({ navigation }) => {
             />
           </InputFormCenter>
         </Spacer>
+        <TouchableOpacity onPress={() => navigation.navigate('Sources')}>
+          <Spacer position="top" size="large">
+          <SourceLabel>Sources</SourceLabel>
+          </Spacer>
+        </TouchableOpacity>
       </FormCenter>
 
       <FormButton

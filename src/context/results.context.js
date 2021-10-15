@@ -7,13 +7,21 @@ import { getInfo, getAllCountries, getCountryInfo } from '../services/requests.s
 export const LocationContext = React.createContext();
 
 export const LocationContextProvider = ({ children }) => {
+  //sets state
   const [area, setArea] = useState();
+  //sets country
   const [country, setCountry] = useState();
+
+  //sets country code for querying country info
   const [countryISO, setCountryISO] = useState([]);
 
+  //sets historical country info
   const [countryInfo, setcountryInfo] = useState([]);
 
+  //sets state data
   const [location, setLocation] = useState([]);
+
+  //gets list of countries for pulldown menu
   const [countries, setcountries] = useState([]);
 
   const getArea = (clickedArea) => {
@@ -68,6 +76,7 @@ export const LocationContextProvider = ({ children }) => {
   return (
     <LocationContext.Provider
       value={{
+        area,
         location,
         getArea,
         getCountry,
@@ -78,7 +87,6 @@ export const LocationContextProvider = ({ children }) => {
         countryISO,
         countries,
         country,
-        area,
       }}>
       {children}
     </LocationContext.Provider>

@@ -8,6 +8,15 @@ export const CardContainer = styled.View`
   width: 100%;
   height: 100%;
 `;
+export const SourcesContainer = styled.View`
+  background-color: rgba(255, 255, 255, 0.7);
+  
+  padding: ${(props) => props.theme.space[4]};
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+`;
 
 export const ResultCardBackground = styled.View`
   background-color: white;

@@ -3,7 +3,7 @@
 import { SafeArea } from '../../components/utility/safe-area.components';
 import React, { useContext, useState, useEffect } from 'react';
 import { Spacer } from '../../components/style/spacer.component';
-import { Text, FlatList, ScrollView } from 'react-native';
+import { Text, ScrollView } from 'react-native';
 import { vaccineComputation } from '../../services/vaccine.service';
 import { LocationContext } from '../../context/results.context';
 import { Tip } from 'react-native-tip';
@@ -35,7 +35,7 @@ export const ResultsScreen = ({ route }) => {
   const { age, sex, area, country } = route.params;
   // const { location, setLocation } = useState();
   const { location, retrieveCountry, countryInfo, retrieveLocation } = useContext(LocationContext);
-  const { graphInfo, vaccineInfo, retrieveGraphInfo, retrieveVaccineInfo } =
+  const { graphInfo, vaccineInfo, retrieveGraphInfo, retrieveStateGraphInfo, retrieveVaccineInfo } =
     useContext(GraphContext);
   const results = vaccineComputation(age, sex, area);
   useEffect(() => {
@@ -43,6 +43,9 @@ export const ResultsScreen = ({ route }) => {
     retrieveGraphInfo();
     retrieveVaccineInfo();
     retrieveLocation();
+    if (countryInfo.country == 'USA') {
+      retrieveStateGraphInfo();
+    }
     console.log('vaccineInfo', vaccineInfo, graphInfo);
 
     console.log('location', location);
@@ -55,7 +58,7 @@ export const ResultsScreen = ({ route }) => {
           <AssessmentText>
             Vaccine Assessment{' '}
             <Tip
-              title="Cards show the increased odds of acquiring side effects associated with each vaccine
+              title="Cards show the increased odds of acquiring side effects associated with each vaccine. 
             "
               body=" ">
               <Text
@@ -129,7 +132,7 @@ export const ResultsScreen = ({ route }) => {
           {countryInfo.country == 'USA' && (
             <>
               <SmallWhiteResultCard>
-                <SmallNumber>{location.active} </SmallNumber>
+                <SmallNumber>{location.cases} </SmallNumber>
                 <Label>Total Cases in {area} </Label>
               </SmallWhiteResultCard>
               <SmallWhiteResultCard>
@@ -148,12 +151,12 @@ export const ResultsScreen = ({ route }) => {
             <>
               <WhiteResultCard>
                 <Number>{countryInfo.active} </Number>
-                <Label>Total Active Cases </Label>
+                <Label>Total Active Cases in {countryInfo.country}</Label>
               </WhiteResultCard>
 
               <WhiteResultCard>
                 <Number>{countryInfo.cases} </Number>
-                <Label>Total Recorded Cases </Label>
+                <Label>Total Recorded Cases in {countryInfo.country}</Label>
               </WhiteResultCard>
             </>
           )}
@@ -162,7 +165,7 @@ export const ResultsScreen = ({ route }) => {
           <MiniCardContainer>
             <WhiteResultCard>
               <GraphComponent data={graphInfo}></GraphComponent>
-              <AssessmentText>Cases in last 90 days in {countryInfo.country} </AssessmentText>
+              <AssessmentText>Cases in last 60 days in {countryInfo.country} </AssessmentText>
             </WhiteResultCard>
           </MiniCardContainer>
         )}
@@ -171,7 +174,7 @@ export const ResultsScreen = ({ route }) => {
             <WhiteResultCard>
               <GraphComponent data={vaccineInfo}></GraphComponent>
               <AssessmentText>
-                Vaccinations in last 90 days in {countryInfo.country}{' '}
+                Vaccinations in last 60 days in {countryInfo.country}{' '}
               </AssessmentText>
             </WhiteResultCard>
           </MiniCardContainer>
