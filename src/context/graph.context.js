@@ -50,7 +50,7 @@ export const GraphContextProvider = ({ children }) => {
 
         setInfectionPerPopInfo(
           Object.fromEntries(
-            Object.entries(res.cases).map(([k, v]) => [k, v / countryInfo.population]),
+            Object.entries(res.cases).map(([k, v]) => [k, (v / countryInfo.population) * 1000000]),
           ),
         );
         console.log('infectionPerPopInfo', infectionPerPopInfo, graphInfo);

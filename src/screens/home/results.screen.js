@@ -37,6 +37,7 @@ export const ResultsScreen = ({ route }) => {
   const { location, retrieveCountry, countryInfo, retrieveLocation } = useContext(LocationContext);
   const {
     graphInfo,
+    infectionPerPopInfo,
     graphInfoDeaths,
     graphInfoRecovered,
     vaccineInfo,
@@ -182,6 +183,17 @@ export const ResultsScreen = ({ route }) => {
             </WhiteResultCard>
           </MiniCardContainer>
         )}
+        {infectionPerPopInfo && (
+          <MiniCardContainer>
+            <WhiteResultCard>
+              <GraphComponent mode={false} data1={infectionPerPopInfo}></GraphComponent>
+              <AssessmentText>
+                Cumulative Cases per One-Million Population in last 60 days in {countryInfo.country}{' '}
+              </AssessmentText>
+            </WhiteResultCard>
+          </MiniCardContainer>
+        )}
+
         {vaccineInfo && (
           <MiniCardContainer>
             <WhiteResultCard>
