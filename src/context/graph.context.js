@@ -6,15 +6,27 @@ import {
   getHistoricalData,
   getHistoricalStateData,
   getVaccineData,
+  getCountryInfo,
 } from '../services/requests.service';
 export const GraphContext = React.createContext();
 
 export const GraphContextProvider = ({ children }) => {
-  const { country, area } = useContext(LocationContext);
+  const { country, area, countryInfo } = useContext(LocationContext);
   const [stateInfo, setStateInfo] = useState({
     '8/10/21': 183347,
   });
+
+  const [infectionPerPopInfo, setInfectionPerPopInfo] = useState({
+    '8/10/21': 13347,
+  });
   const [graphInfo, setGraphInfo] = useState({
+    '8/10/21': 183347,
+  });
+  const [graphInfoDeaths, setGraphInfoDeaths] = useState({
+    '8/10/21': 183347,
+  });
+
+  const [graphInfoRecovered, setGraphInfoRecovered] = useState({
     '8/10/21': 183347,
   });
 
@@ -22,11 +34,26 @@ export const GraphContextProvider = ({ children }) => {
     '8/10/21': 183347,
   });
 
+  const retrieveGraphPerCapInfo = () => {
+    console.log('graphPerCap', graphInfo, country);
+    graphInfo.map((info) => {
+      Object.value(info) / country.population;
+    });
+  };
+
   const retrieveGraphInfo = () => {
     getHistoricalData(country)
       .then((res) => {
-        setGraphInfo(res);
-        console.log('graph info', res);
+        setGraphInfo(res.cases);
+        setGraphInfoDeaths(res.deaths);
+        setGraphInfoRecovered(res.recovered);
+
+        setInfectionPerPopInfo(
+          Object.fromEntries(
+            Object.entries(res.cases).map(([k, v]) => [k, v / countryInfo.population]),
+          ),
+        );
+        console.log('infectionPerPopInfo', infectionPerPopInfo, graphInfo);
       })
       .catch((err) => {
         console.log(err);
@@ -61,8 +88,12 @@ export const GraphContextProvider = ({ children }) => {
     <GraphContext.Provider
       value={{
         graphInfo,
+        graphInfoRecovered,
+        graphInfoDeaths,
         vaccineInfo,
         stateInfo,
+        infectionPerPopInfo,
+        retrieveGraphPerCapInfo,
         retrieveGraphInfo,
         retrieveVaccineInfo,
         retrieveStateGraphInfo,

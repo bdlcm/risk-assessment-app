@@ -34,7 +34,7 @@ export const getHistoricalData = (country) => {
   return fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      return data.timeline.cases;
+      return data.timeline;
     })
     .catch((err) => console.error(err));
 };

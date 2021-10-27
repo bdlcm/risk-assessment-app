@@ -35,8 +35,16 @@ export const ResultsScreen = ({ route }) => {
   const { age, sex, area, country } = route.params;
   // const { location, setLocation } = useState();
   const { location, retrieveCountry, countryInfo, retrieveLocation } = useContext(LocationContext);
-  const { graphInfo, vaccineInfo, retrieveGraphInfo, retrieveStateGraphInfo, retrieveVaccineInfo } =
-    useContext(GraphContext);
+  const {
+    graphInfo,
+    graphInfoDeaths,
+    graphInfoRecovered,
+    vaccineInfo,
+    retrieveGraphInfo,
+    retrieveStateGraphInfo,
+    retrieveVaccineInfo,
+    retrieveGraphPerCapInfo,
+  } = useContext(GraphContext);
   const results = vaccineComputation(age, sex, area);
   useEffect(() => {
     retrieveCountry();
@@ -164,17 +172,22 @@ export const ResultsScreen = ({ route }) => {
         {graphInfo && (
           <MiniCardContainer>
             <WhiteResultCard>
-              <GraphComponent data={graphInfo}></GraphComponent>
-              <AssessmentText>Cases in last 60 days in {countryInfo.country} </AssessmentText>
+              <GraphComponent
+                mode={true}
+                data1={graphInfo}
+                data2={graphInfoDeaths}></GraphComponent>
+              <AssessmentText>
+                Cumulative Cases in last 60 days in {countryInfo.country}{' '}
+              </AssessmentText>
             </WhiteResultCard>
           </MiniCardContainer>
         )}
         {vaccineInfo && (
           <MiniCardContainer>
             <WhiteResultCard>
-              <GraphComponent data={vaccineInfo}></GraphComponent>
+              <GraphComponent mode={false} data1={vaccineInfo}></GraphComponent>
               <AssessmentText>
-                Vaccinations in last 60 days in {countryInfo.country}{' '}
+                Cumulative Vaccinations in last 60 days in {countryInfo.country}{' '}
               </AssessmentText>
             </WhiteResultCard>
           </MiniCardContainer>
