@@ -183,7 +183,7 @@ export const ResultsScreen = ({ route }) => {
             </WhiteResultCard>
           </MiniCardContainer>
         )}
-        {infectionPerPopInfo && (
+        {/* {infectionPerPopInfo && (
           <MiniCardContainer>
             <WhiteResultCard>
               <GraphComponent mode={false} data1={infectionPerPopInfo}></GraphComponent>
@@ -192,7 +192,7 @@ export const ResultsScreen = ({ route }) => {
               </AssessmentText>
             </WhiteResultCard>
           </MiniCardContainer>
-        )}
+        )} */}
 
         {vaccineInfo && (
           <MiniCardContainer>
