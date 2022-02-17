@@ -1,4 +1,4 @@
-# vaccine-profile-app
+# vaccine-app
 React Native app showing increased chances of certain side-effects associated with vaccines depending on age/sex profile. Results for increased vaccine side effects are based on reports from the VAERS database.
  
 To run, must have Expo and Xcode install.
