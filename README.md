@@ -1,4 +1,4 @@
-# vaccine-app
+# risk-assessment-app
 
 ## This app is not intended to be used as medical advice! 
 
